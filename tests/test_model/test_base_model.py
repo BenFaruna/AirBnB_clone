@@ -3,6 +3,7 @@
 import io
 import time
 import unittest
+import uuid
 from unittest.mock import patch
 from models.base_model import BaseModel
 from datetime import datetime
@@ -107,3 +108,48 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertEqual(created_at, datetime.isoformat(model.created_at))
         self.assertEqual(updated_at, datetime.isoformat(model.updated_at))
+
+    def test_instance_creation_when_kwargs_is_empty(self):
+        """test instance is created with id, created_at and updated_at when
+        kwargs is empty"""
+        model = BaseModel()
+        attr_no = len(model.__dict__)
+        self.assertEqual(attr_no, 3)
+        self.assertIn("id", model.__dict__)
+        self.assertIn("created_at", model.__dict__)
+        self.assertIn("updated_at", model.__dict__)
+
+    def test_instance_creation_when_kwargs_is_not_empty(self):
+        """test to ensure instance is created properly when kwargs values are given"""
+        model = BaseModel()
+        model_json = model.to_dict()
+        model_2 = BaseModel(model_json)
+        self.assertIsInstance(model_2, BaseModel)
+
+    def test_instance_contain_right_values_from_kwargs(self):
+        """test instance is created with the right values from kwargs"""
+        model = BaseModel()
+        model_json = model.to_dict()
+        model_2 = BaseModel(**model_json)
+        self.assertEqual(model_2.id, model_json["id"])
+        self.assertEqual(datetime.isoformat(model_2.created_at),
+                         model_json["created_at"])
+        self.assertEqual(datetime.isoformat(model_2.updated_at),
+                         model_json["updated_at"])
+
+    def test_kwargs_instance_created_at_and_updated_at_in_datetime_format(self):
+        """test to ensure created_at and updated_at are convereted into
+        datetime format while instance is created using kwargs"""
+        model = BaseModel()
+        model_json = model.to_dict()
+        model_2 = BaseModel(**model_json)
+        self.assertIsInstance(model_2.created_at, datetime)
+        self.assertIsInstance(model_2.updated_at, datetime)
+
+    def test_kwargs_instance_does_not_have_class_attribute(self):
+        """test to verify the __class__ key is not an attribute of instance
+        created with kwargs"""
+        model = BaseModel()
+        model_json = model.to_dict()
+        model_2 = BaseModel(**model_json)
+        self.assertNotIn("__class__", model_2.__dict__)
