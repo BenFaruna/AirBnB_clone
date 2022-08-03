@@ -4,6 +4,10 @@ other classes"""
 import uuid
 from datetime import datetime
 
+import models
+
+models.storage.reload()
+
 
 class BaseModel:
     """model that defines common attributes and methods for other classes"""
