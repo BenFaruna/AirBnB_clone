@@ -231,3 +231,7 @@ class TestBaseModel(unittest.TestCase):
         """test the save method of the FileStorage class is an attribute of
         the class FileStorage"""
         self.assertIsNotNone(getattr(FileStorage(), "save"))
+
+
+if __name__ == "__main__":
+    unittest.main()
