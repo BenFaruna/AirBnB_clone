@@ -211,9 +211,9 @@ class TestBaseModel(unittest.TestCase):
         for key in file_storage.all():
             class_name, model_id = key.split(".")
         self.assertEqual(class_name, type(model).__name__)
-        self.assertEqual(model.id, model.id)
+        self.assertEqual(model.id, model_id)
 
-    def test_new_value_updates_to_the_right_dict_representation_of_model(self):
+    def test_new_value_updates_to_an_object(self):
         """test the new value update to ensure it is the right dictionary
         representation of the model"""
         file_storage = FileStorage()
@@ -225,7 +225,7 @@ class TestBaseModel(unittest.TestCase):
         for key in storage:
             value = storage[key]
 
-        self.assertDictEqual(value, model.to_dict())
+        self.assertIsInstance(value, type(model))
 
     def test_save_method_is_present(self):
         """test the save method of the FileStorage class is an attribute of

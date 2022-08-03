@@ -6,8 +6,6 @@ from datetime import datetime
 
 import models
 
-models.storage.reload()
-
 
 class BaseModel:
     """model that defines common attributes and methods for other classes"""
@@ -26,6 +24,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+        models.storage.new(self)
 
     def __str__(self):
         """string representation of the BaseModel class"""
@@ -35,6 +34,7 @@ class BaseModel:
     def save(self):
         """updates the object by updating the updated_at value"""
         setattr(self, "updated_at", datetime.now())
+        models.storage.save()
 
     def to_dict(self):
         obj_dict = self.__dict__.copy()
