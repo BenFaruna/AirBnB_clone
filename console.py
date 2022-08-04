@@ -1,11 +1,7 @@
 #!/usr/bin/python3
 """module that contains entry point to the command interpreter"""
 import cmd
-from hashlib import new
-
 import models
-from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -136,7 +132,6 @@ class HBNBCommand(cmd.Cmd):
                         except (KeyError):
                             print("** no instance found **")
                             return
-
 
             if len(new_arg) == 1:
                 print("** instance id missing **")

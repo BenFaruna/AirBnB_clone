@@ -120,7 +120,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn("updated_at", model.__dict__)
 
     def test_instance_creation_when_kwargs_is_not_empty(self):
-        """test to ensure instance is created properly when kwargs values are given"""
+        """test to ensure instance is created properly when kwargs values
+        are given"""
         model = BaseModel()
         model_json = model.to_dict()
         model_2 = BaseModel(model_json)
@@ -137,7 +138,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(datetime.isoformat(model_2.updated_at),
                          model_json["updated_at"])
 
-    def test_kwargs_instance_created_at_and_updated_at_in_datetime_format(self):
+    def test_kwargs_created_at_and_updated_at_in_datetime_format(self):
         """test to ensure created_at and updated_at are convereted into
         datetime format while instance is created using kwargs"""
         model = BaseModel()
