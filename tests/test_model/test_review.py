@@ -94,5 +94,6 @@ class TestReview(unittest.TestCase):
         with open("file.json", "r") as file:
             self.assertIn("Review." + obj_review.id, file.read())
 
+
 if __name__ == "__main__":
     unittest.main()

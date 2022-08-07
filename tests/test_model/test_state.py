@@ -91,5 +91,6 @@ class TestState(unittest.TestCase):
         with open("file.json", "r") as file:
             self.assertIn("State." + obj_state.id, file.read())
 
+
 if __name__ == "__main__":
     unittest.main()

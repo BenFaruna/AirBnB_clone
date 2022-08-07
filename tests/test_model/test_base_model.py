@@ -12,6 +12,14 @@ from models.engine.file_storage import FileStorage
 class TestBaseModel(unittest.TestCase):
     """TestCase for BaseModel"""
 
+    def setUp(self):
+        """Set up test methods"""
+        pass
+
+    def tearDown(self):
+        """Tear Down test methods"""
+        pass
+
     @patch("sys.stdout", new_callable=io.StringIO)
     def assert_print_stdout(self, ins, expected_output, mock_stdout):
         """used to test output to stdout"""

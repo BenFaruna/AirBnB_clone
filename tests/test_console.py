@@ -6,9 +6,16 @@ from io import StringIO
 from console import HBNBCommand
 
 
-
 class test_HBNBCommand(unittest.TestCase):
     """Test for console"""
+
+    def setUp(self):
+        """set up before starting every test case"""
+        pass
+
+    def tearDown(self):
+        """tear down procedures after every test case"""
+        pass        
 
     def test_prompt(self):
         """test the prompt is correct"""
@@ -25,3 +32,7 @@ class test_HBNBCommand(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("quit")
             self.assertEqual('', f.getvalue())
+
+
+if __name__ == "__main__":
+    unittest.main()

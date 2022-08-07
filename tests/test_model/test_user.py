@@ -4,9 +4,7 @@
 import unittest
 import time
 from models.base_model import BaseModel
-from models import user
-
-User = user.User
+from models.user import User
 
 
 class TestUser(unittest.TestCase):

@@ -101,5 +101,6 @@ class TestPlace(unittest.TestCase):
         with open("file.json", "r") as file:
             self.assertIn("Place." + obj_place.id, file.read())
 
+
 if __name__ == "__main__":
     unittest.main()
