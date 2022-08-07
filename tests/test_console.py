@@ -62,8 +62,13 @@ class test_HBNBCommand(unittest.TestCase):
         input"""
         str_1 = 'User 123-4567-890 name "John Doe" age 100'
         str_2 = "Place 321-7654-098 lat 22.0 lon 10.3"
-        expected_output_1 = ["User", "123-4567-890", "name", "John Doe", "age", "100"]
-        expected_output_2 = ["Place", "321-7654-098", "lat", "22.0", "lon", "10.3"]
+        expected_output_1 = [
+            "User", "123-4567-890", "name", "John Doe", "age", "100"
+            ]
+
+        expected_output_2 = [
+            "Place", "321-7654-098", "lat", "22.0", "lon", "10.3"
+            ]
         output_1 = HBNBCommand().pattern_handling(str_1)
         output_2 = HBNBCommand().pattern_handling(str_2)
         self.assertEqual(expected_output_1, output_1)
@@ -85,10 +90,14 @@ class test_HBNBCommand(unittest.TestCase):
         """test to show what handle arg method returns"""
         str_1 = "BaseModel 123-4567-890"
         str_2 = "User 456-7890-123"
-        expected_output_1 = ("BaseModel.123-4567-890",
-        ["BaseModel", "123-4567-890"])
-        expected_output_2 = ("User.456-7890-123",
-        ["User", "456-7890-123"])
+        expected_output_1 = (
+            "BaseModel.123-4567-890", [
+                "BaseModel", "123-4567-890"
+                ])
+        expected_output_2 = (
+            "User.456-7890-123", [
+                "User", "456-7890-123"
+                ])
         output_1 = HBNBCommand().handle_arg(str_1)
         output_2 = HBNBCommand().handle_arg(str_2)
         self.assertEqual(expected_output_1, output_1)
@@ -99,10 +108,14 @@ class test_HBNBCommand(unittest.TestCase):
         input"""
         str_1 = 'User 123-4567-890 name "John Doe" age 100'
         str_2 = "Place 321-7654-098 lat 22.0 lon 10.3"
-        expected_output_1 = ("User.123-4567-890",
-        ["User", "123-4567-890", "name", "John Doe", "age", "100"])
-        expected_output_2 = ("Place.321-7654-098",
-        ["Place", "321-7654-098", "lat", "22.0", "lon", "10.3"])
+        expected_output_1 = (
+            "User.123-4567-890", [
+                "User", "123-4567-890", "name", "John Doe", "age", "100"
+                ])
+        expected_output_2 = (
+            "Place.321-7654-098", [
+                "Place", "321-7654-098", "lat", "22.0", "lon", "10.3"
+                ])
         output_1 = HBNBCommand().handle_arg(str_1)
         output_2 = HBNBCommand().handle_arg(str_2)
         self.assertEqual(expected_output_1, output_1)

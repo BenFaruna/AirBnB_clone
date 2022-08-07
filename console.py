@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
         to a pattern so that they can be invoked under this scheme:
         <class>. <cmd> ([args, ...])
         """
-        pattern = '\.([^.]+)\(|([^(),]+)[,\s()]*[,\s()]*'
+        pattern = r'\.([^.]+)\(|([^(),]+)[,\s()]*[,\s()]*'
         argum = re.findall(pattern, arg)
         cmd = argum[0][0]
         argum = argum[1:]
