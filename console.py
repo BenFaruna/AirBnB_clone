@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
         models_list = []
         if len(arg) == 0:
             for model in models.storage.all():
-                models_list.append(models.storage.all()[model].to_dict())
+                models_list.append(str(models.storage.all()[model]))
             print(models_list)
         else:
             key, new_arg = self.handle_arg(arg)
@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 for model in models.storage.all():
                     if model.split(".")[0] == new_arg[0]:
-                        models_list.append(models.storage.all()[model].to_dict())
+                        models_list.append(str(models.storage.all()[model]))
                 print(models_list)
 
     def do_update(self, arg):
