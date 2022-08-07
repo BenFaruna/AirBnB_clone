@@ -15,7 +15,7 @@ class test_HBNBCommand(unittest.TestCase):
 
     def tearDown(self):
         """tear down procedures after every test case"""
-        pass        
+        pass
 
     def test_prompt(self):
         """test the prompt is correct"""

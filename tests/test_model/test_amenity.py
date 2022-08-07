@@ -91,5 +91,6 @@ class TestAmenity(unittest.TestCase):
         with open("file.json", "r") as file:
             self.assertIn("Amenity." + obj_amenity.id, file.read())
 
+
 if __name__ == "__main__":
     unittest.main()
