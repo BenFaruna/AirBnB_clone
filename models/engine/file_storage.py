@@ -34,7 +34,7 @@ class FileStorage:
             obj_json = {
                 obj: file_dict[obj].to_dict() for obj in file_dict.keys()
                 }
-            json.dump(obj_json, f)
+            json.dump(obj_json, f, indent=2)
 
     def reload(self):
         """deserializes the JSON file to __objects if JSON file exists"""

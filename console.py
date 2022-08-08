@@ -6,6 +6,8 @@ import models
 
 
 class HBNBCommand(cmd.Cmd):
+    """Console class handling console functions"""
+
     prompt = "(hbnb) "
 
     @staticmethod
@@ -21,6 +23,30 @@ class HBNBCommand(cmd.Cmd):
         argum = argum[1:]
         line = ' '.join(map(lambda x: x[1].strip('"'), argum))
         return cmd, line
+
+    @staticmethod
+    def loop_dic(line, obj_upt):
+        """
+        Loop for update with format:
+        <class name>.update(<id>, <dictionary representation>)
+        """
+        j = 4
+        while j <= len(line):
+            try:
+                atrribute = line[j]
+            except IndexError:
+                print("** attribute name missing **")
+            else:
+                try:
+                    value = line[j+1]
+                except IndexError:
+                    print("** value missing **")
+                else:
+                    setattr(obj_upt, atrribute, value)
+                    obj_upt.save()
+                    if j+1 == len(line) - 1:
+                        break
+            j += 1
 
     @staticmethod
     def pattern_handling(args):
@@ -51,6 +77,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """when an empty command is entered, nothing is done"""
         return False
 
     def do_create(self, arg):
@@ -129,41 +156,44 @@ class HBNBCommand(cmd.Cmd):
                 print(models_list)
 
     def do_update(self, arg):
-        """updates an instance based on the class name and id by adding
-        or updating attribute"""
+        """
+        Updates an instance based on the class name and id
+        by adding or updating attribute (save the change into the JSON file).
+        Ex: $ update BaseModel 1234-1234-1234 email
+        """
         if len(arg) == 0:
-            print("** class name is missing **")
+            print("** class name missing **")
         else:
-            key, new_arg = self.handle_arg(arg)
-            if not models.classes.get(new_arg[0], False):
-                print("** class doesn't exist **")
-                return
-            else:
-                if len(new_arg) >= 2:
-                    if len(new_arg) == 2:
-                        print("** attribute name missing **")
-                        return
-
-                    elif len(new_arg) % 2 == 1:
-                        print("** value missing **")
-                        return
+            line = arg.split(' ')
+            for iter in range(len(line)):
+                line[iter] = line[iter].strip("\"'\"{\"}:\"'")
+            if line[0] in models.classes:
+                try:
+                    key = "{}.{}".format(line[0], line[1])
+                except IndexError:
+                    print("** instance id missing **")
+                else:
+                    try:
+                        obj_upt = models.storage.all()[key]
+                    except KeyError:
+                        print("** no instance found **")
                     else:
-                        attr = new_arg[2::2]
-                        value = new_arg[3::2]
                         try:
-                            model_dict = models.storage.all().get(key)
-                            model = models.classes.get(new_arg[0])
-                            model = (model_dict)
-                            for i in range(len(attr)):
-                                setattr(model, attr[i], value[i])
-                            model.save()
-                        except (KeyError):
-                            print("** no instance found **")
-                            return
-
-            if len(new_arg) == 1:
-                print("** instance id missing **")
-                return
+                            atrribute = line[2]
+                        except IndexError:
+                            print("** attribute name missing **")
+                        else:
+                            try:
+                                value = line[3]
+                            except IndexError:
+                                print("** value missing **")
+                            else:
+                                setattr(obj_upt, atrribute, value)
+                                obj_upt.save()
+                                if len(line) >= 5:
+                                    HBNBCommand.loop_dic(line, obj_upt)
+            else:
+                print("** class doesn't exist **")
 
     def do_BaseModel(self, arg):
         """
@@ -228,7 +258,7 @@ class HBNBCommand(cmd.Cmd):
 
         cmd can be: all, create, update, show destroy
         """
-        cmd, line = self.self.pattern(arg)
+        cmd, line = self.pattern(arg)
         self.onecmd(' '.join([cmd, 'State', line]))
 
     def do_User(self, arg):
