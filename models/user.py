@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module containig User class"""
+"""module that contains the User class"""
 from models.base_model import BaseModel
 
 
