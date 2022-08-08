@@ -416,7 +416,7 @@ class test_HBNBCommand(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("User.count()"))
             self.assertEqual("1", f.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as f:
-                self.assertFalse(HBNBCommand().onecmd("create State"))
+            self.assertFalse(HBNBCommand().onecmd("create State"))
         with patch("sys.stdout", new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("State.count()"))
             self.assertEqual("1", f.getvalue().strip())
@@ -440,7 +440,6 @@ class test_HBNBCommand(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("Review.count()"))
             self.assertEqual("1", f.getvalue().strip())
-
 
 
 if __name__ == "__main__":
