@@ -19,7 +19,7 @@ h4 {
     margin-left: 30px;
 }
 
-section {
+section.filters {
     display: flex;
     justify-content: right;
 }
